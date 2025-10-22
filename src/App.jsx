@@ -2,7 +2,7 @@ import React from 'react';
 import Dashboard from './components/Dashboard';
 import TransactionList from './components/TransactionList';
 import AddTransaction from './components/AddTransaction';
-import './App.css'; // We will create this file
+import './App.css'; 
 
 function App() {
   return (
