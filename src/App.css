@@ -18,7 +18,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* Dashboard */
+
 .summary-cards {
   display: flex;
   justify-content: space-around;
@@ -88,7 +88,7 @@ body {
   background-color: #2980b9;
 }
 
-/* Transaction List */
+
 .transaction-list ul {
   list-style-type: none;
   padding: 0;
@@ -103,9 +103,9 @@ body {
 
 .transaction-list li span:last-child {
   font-weight: 600;
-  color: #e74c3c; /* Red for expenses */
+  color: #e74c3c; 
 }
 
 .transaction-list li span.income {
-  color: #2ecc71; /* Green for income */
+  color: #2ecc71; 
 }
