@@ -1,21 +1,19 @@
 import React from 'react';
 import Dashboard from '../components/Dashboard';
-import ExpenseChart from '../components/ExpenseChart'; 
+import ExpenseChart from '../components/ExpenseChart'; // We will create this
 import TransactionList from '../components/TransactionList';
 
-// NEW: Accept onDeleteTransaction as a prop
-function DashboardPage({ transactions, onDeleteTransaction }) {
+// This page combines components
+function DashboardPage({ transactions }) {
   return (
     <div className="dashboard-page">
       <Dashboard transactions={transactions} />
       <ExpenseChart transactions={transactions} />
       
+      {/* We can also show the recent transaction list here */}
       <div style={{ marginTop: '30px' }}>
-        {/* NEW: Pass the delete function to TransactionList */}
-        <TransactionList 
-          transactions={transactions} // Show all transactions
-          onDeleteTransaction={onDeleteTransaction} // Pass it down
-        /> 
+        <TransactionList transactions={transactions.slice(0, 5)} /> 
+        {/* Only show the 5 most recent */}
       </div>
     </div>
   );

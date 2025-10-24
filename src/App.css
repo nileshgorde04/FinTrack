@@ -110,7 +110,6 @@ body {
   color: #2ecc71; 
 }
 
-/* Navigation */
 .app-header nav {
   display: flex;
   justify-content: center;
@@ -132,7 +131,6 @@ body {
   background-color: #ecf0f1;
 }
 
-/* Chart Container */
 .chart-container {
   background-color: #fff;
   padding: 20px;
@@ -148,14 +146,14 @@ body {
 
 /* Make AddTransaction component full width when on its own page */
 .content-wrapper {
-  /* This class is no longer used in App.jsx, 
-     but we can re-purpose it or remove it. 
-     For now, we'll just style the components directly. */
-}
+  /* This class is currently unused in App.jsx. 
+   It can be repurposed or safely removed later. 
+   For now, styling is applied directly to components. */
+
 
 .add-transaction {
   max-width: 600px;
-  margin: 0 auto; /* Center the form on the "Add" page */
+  margin: 0 auto; 
 }
 
 /* ... (all your existing CSS) ... */
