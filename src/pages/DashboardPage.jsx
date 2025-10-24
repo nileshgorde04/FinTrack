@@ -1,9 +1,9 @@
 import React from 'react';
 import Dashboard from '../components/Dashboard';
-import ExpenseChart from '../components/ExpenseChart'; // We will create this
+import ExpenseChart from '../components/ExpenseChart'; 
 import TransactionList from '../components/TransactionList';
 
-// This page combines components
+// Combines the component
 function DashboardPage({ transactions }) {
   return (
     <div className="dashboard-page">
