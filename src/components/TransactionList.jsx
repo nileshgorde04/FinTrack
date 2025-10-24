@@ -1,21 +1,27 @@
 import React from 'react';
 
-// Accept the transactions list as a prop
-function TransactionList({ transactions }) {
+// NEW: Accept onDeleteTransaction as a prop
+function TransactionList({ transactions, onDeleteTransaction }) {
   return (
     <div className="transaction-list">
       <h2>Recent Transactions</h2>
       <ul>
-        {/* Map over the transactions array */}
         {transactions.map((transaction) => (
           <li key={transaction.id}>
             <span>{transaction.description}</span>
-            {/* Check the type and apply the correct class.
-              Display a '+' for income and '-' for expense.
-            */}
-            <span className={transaction.type === 'income' ? 'income' : 'expense'}>
-              {transaction.type === 'income' ? '+' : '-'}₹{transaction.amount}
-            </span>
+            <div className="transaction-details">
+              {/* Check the type and apply the correct class */}
+              <span className={transaction.type === 'income' ? 'income' : 'expense'}>
+                {transaction.type === 'income' ? '+' : '-'}₹{transaction.amount}
+              </span>
+              {/* NEW: Add a delete button */}
+              <button 
+                className="delete-btn" 
+                onClick={() => onDeleteTransaction(transaction.id)}
+              >
+                X
+              </button>
+            </div>
           </li>
         ))}
       </ul>

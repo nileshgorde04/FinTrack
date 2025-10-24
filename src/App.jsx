@@ -9,7 +9,6 @@ import AddTransaction from './components/AddTransaction'; // We can re-use this 
 
 function App() {
   // --- State Management ---
-  // This state is now shared across all pages!
   const [transactions, setTransactions] = useState([
     { id: 1, description: 'Salary', amount: 50000, type: 'income' },
     { id: 2, description: 'Starbucks', amount: 350, type: 'expense' },
@@ -23,6 +22,12 @@ function App() {
     setTransactions([newTransaction, ...transactions]); // Add to the beginning of the list
   };
 
+  // NEW: Function to handle deleting a transaction
+  const handleDeleteTransaction = (id) => {
+    // Filter out the transaction with the matching id
+    setTransactions(transactions.filter((tx) => tx.id !== id));
+  };
+
   // --- Routing Setup ---
   return (
     <BrowserRouter>
@@ -33,7 +38,13 @@ function App() {
           {/* The default page (path="/") */}
           <Route 
             index 
-            element={<DashboardPage transactions={transactions} />} 
+            element={
+              <DashboardPage 
+                transactions={transactions} 
+                // NEW: Pass the delete function down
+                onDeleteTransaction={handleDeleteTransaction} 
+              />
+            } 
           />
           
           {/* The "Add Transaction" page (path="/add") */}
@@ -41,9 +52,6 @@ function App() {
             path="add" 
             element={<AddTransaction onAddTransaction={handleAddTransaction} />} 
           />
-
-          {/* You can add more pages later, like: */}
-          {/* <Route path="budgets" element={<BudgetPage />} /> */}
           
         </Route>
       </Routes>
