@@ -110,6 +110,7 @@ body {
   color: #2ecc71; 
 }
 
+/* Navigation */
 .app-header nav {
   display: flex;
   justify-content: center;
@@ -131,6 +132,7 @@ body {
   background-color: #ecf0f1;
 }
 
+/* Chart Container */
 .chart-container {
   background-color: #fff;
   padding: 20px;
@@ -146,17 +148,15 @@ body {
 
 /* Make AddTransaction component full width when on its own page */
 .content-wrapper {
-  /* This class is currently unused in App.jsx. 
-   It can be repurposed or safely removed later. 
-   For now, styling is applied directly to components. */
-
+  /* This class is no longer used in App.jsx, 
+     but we can re-purpose it or remove it. 
+     For now, we'll just style the components directly. */
+}
 
 .add-transaction {
   max-width: 600px;
-  margin: 0 auto; 
+  margin: 0 auto; /* Center the form on the "Add" page */
 }
-
-/* ... (all your existing CSS) ... */
 
 /* NEW: Styles for the delete button */
 .transaction-list li {
@@ -183,4 +183,29 @@ body {
 
 .delete-btn:hover {
   background-color: #c0392b;
+}
+
+/* Style for the transaction info (description + date) */
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-date {
+  font-size: 0.8em;
+  color: #777;
+}
+
+/* Make the radio buttons line up better */
+.radio-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Adjust AddTransaction inputs to be full width */
+.add-transaction input[type="text"],
+.add-transaction input[type="number"],
+.add-transaction input[type="date"] {
+  width: calc(100% - 20px); /* Account for padding */
 }

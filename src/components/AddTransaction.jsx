@@ -1,18 +1,26 @@
 import React, { useState } from 'react'; // Import useState
 
+// Helper function to get today's date in YYYY-MM-DD format
+const getTodayDate = () => {
+  const today = new Date();
+  return today.toISOString().split('T')[0];
+};
+
 // Accept the onAddTransaction function as a prop
 function AddTransaction({ onAddTransaction }) {
   // State for each form input
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [type, setType] = useState('expense'); // Default to 'expense'
+  // NEW: Add state for date, default to today
+  const [date, setDate] = useState(getTodayDate()); 
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Stop the page from reloading
 
     // Basic validation
-    if (!description || !amount) {
-      alert('Please fill in both description and amount.');
+    if (!description || !amount || !date) { // NEW: Check for date
+      alert('Please fill in all fields.');
       return;
     }
 
@@ -22,6 +30,7 @@ function AddTransaction({ onAddTransaction }) {
       description: description,
       amount: parseFloat(amount), // Convert amount string to a number
       type: type,
+      date: date, // NEW: Include the date
     };
 
     // Call the function passed from App.jsx
@@ -31,6 +40,7 @@ function AddTransaction({ onAddTransaction }) {
     setDescription('');
     setAmount('');
     setType('expense');
+    setDate(getTodayDate()); // Reset date to today
   };
 
   return (
@@ -46,11 +56,18 @@ function AddTransaction({ onAddTransaction }) {
         />
         <input
           type="number"
-          placeholder="Amount (use - for expense)"
+          placeholder="Amount"
           value={amount} // Bind value to state
           onChange={(e) => setAmount(e.target.value)} // Update state on change
         />
-        <div>
+        {/* NEW: Date Input */}
+        <input 
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+        
+        <div className="radio-group">
           <input
             type="radio"
             id="income"

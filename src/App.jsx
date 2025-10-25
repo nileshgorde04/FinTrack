@@ -5,26 +5,26 @@ import './App.css';
 // Import Pages and Layout
 import Layout from './components/Layout';
 import DashboardPage from './pages/DashboardPage';
-import AddTransaction from './components/AddTransaction'; // We can re-use this as a "page"
+import AddTransaction from './components/AddTransaction'; 
 
 function App() {
   // --- State Management ---
+  // NEW: Added 'date' property to initial state
   const [transactions, setTransactions] = useState([
-    { id: 1, description: 'Salary', amount: 50000, type: 'income' },
-    { id: 2, description: 'Starbucks', amount: 350, type: 'expense' },
-    { id: 3, description: 'Book', amount: 800, type: 'expense' },
-    { id: 4, description: 'Groceries', amount: 2500, type: 'expense' },
-    { id: 5, description: 'Freelance', amount: 7000, type: 'income' },
-    { id: 6, description: 'Movie', amount: 600, type: 'expense' },
+    { id: 1, description: 'Salary', amount: 50000, type: 'income', date: '2025-10-01' },
+    { id: 2, description: 'Starbucks', amount: 350, type: 'expense', date: '2025-10-02' },
+    { id: 3, description: 'Book', amount: 800, type: 'expense', date: '2025-10-03' },
+    { id: 4, description: 'Groceries', amount: 2500, type: 'expense', date: '2025-10-03' },
+    { id: 5, description: 'Freelance', amount: 7000, type: 'income', date: '2025-09-28' },
+    { id: 6, description: 'Movie', amount: 600, type: 'expense', date: '2025-09-25' },
   ]);
 
   const handleAddTransaction = (newTransaction) => {
-    setTransactions([newTransaction, ...transactions]); // Add to the beginning of the list
+    // This function already works, as newTransaction now contains the date
+    setTransactions([newTransaction, ...transactions]); 
   };
 
-  // NEW: Function to handle deleting a transaction
   const handleDeleteTransaction = (id) => {
-    // Filter out the transaction with the matching id
     setTransactions(transactions.filter((tx) => tx.id !== id));
   };
 
@@ -32,22 +32,18 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* All pages will render inside the Layout component */}
         <Route path="/" element={<Layout />}>
           
-          {/* The default page (path="/") */}
           <Route 
             index 
             element={
               <DashboardPage 
                 transactions={transactions} 
-                // NEW: Pass the delete function down
                 onDeleteTransaction={handleDeleteTransaction} 
               />
             } 
           />
           
-          {/* The "Add Transaction" page (path="/add") */}
           <Route 
             path="add" 
             element={<AddTransaction onAddTransaction={handleAddTransaction} />} 
