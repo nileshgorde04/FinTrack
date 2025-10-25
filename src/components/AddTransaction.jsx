@@ -11,26 +11,26 @@ function AddTransaction({ onAddTransaction }) {
   // State for each form input
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [type, setType] = useState('expense'); // Default to 'expense'
+  const [type, setType] = useState('expense'); 
   // NEW: Add state for date, default to today
   const [date, setDate] = useState(getTodayDate()); 
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Stop the page from reloading
+    e.preventDefault(); 
 
     // Basic validation
-    if (!description || !amount || !date) { // NEW: Check for date
+    if (!description || !amount || !date) { 
       alert('Please fill in all fields.');
       return;
     }
 
     // Create the new transaction object
     const newTransaction = {
-      id: Date.now(), // Simple unique ID
+      id: Date.now(),
       description: description,
-      amount: parseFloat(amount), // Convert amount string to a number
+      amount: parseFloat(amount), 
       type: type,
-      date: date, // NEW: Include the date
+      date: date,
     };
 
     // Call the function passed from App.jsx
@@ -40,7 +40,7 @@ function AddTransaction({ onAddTransaction }) {
     setDescription('');
     setAmount('');
     setType('expense');
-    setDate(getTodayDate()); // Reset date to today
+    setDate(getTodayDate()); 
   };
 
   return (
@@ -51,7 +51,7 @@ function AddTransaction({ onAddTransaction }) {
         <input
           type="text"
           placeholder="Description"
-          value={description} // Bind value to state
+          value={description} 
           onChange={(e) => setDescription(e.target.value)} // Update state on change
         />
         <input
