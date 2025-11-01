@@ -28,15 +28,13 @@ function AddTransaction({ onAddTransaction }) {
     const newTransaction = {
       id: Date.now(),
       description: description,
-      amount: parseFloat(amount), 
+      amount: parseFloat(amount),
       type: type,
       date: date,
     };
 
-    // Call the function passed from App.jsx
     onAddTransaction(newTransaction);
 
-    // Clear the form fields
     setDescription('');
     setAmount('');
     setType('expense');
