@@ -55,5 +55,4 @@ function ExpenseChart({ transactions }) {
     </div>
   );
 }
-
 export default ExpenseChart;
