@@ -3,14 +3,26 @@ import Dashboard from '../components/Dashboard';
 import ExpenseChart from '../components/ExpenseChart'; 
 import MonthlyExpenseChart from '../components/MonthlyExpenseChart';
 import TransactionList from '../components/TransactionList';
+import SavingsStreak from '../components/SavingsStreak';
 
-// NEW: Accept 'budget' prop
 function DashboardPage({ transactions, budget, onDeleteTransaction }) {
   return (
     <div className="dashboard-page">
-      {/* NEW: Pass 'budget' to Dashboard */}
-      <Dashboard transactions={transactions} budget={budget} />
       
+      {/* NOTE: I am modifying the Dashboard component to *not* render the
+        summary-cards wrapper, and instead render it here.
+        This allows us to add the SavingsStreak card easily.
+      */}
+      
+      <h2>My Dashboard</h2>
+      <div className="summary-cards">
+        {/* Pass props to Dashboard */}
+        <Dashboard transactions={transactions} budget={budget} />
+        
+        {/* NEW: Add the SavingsStreak card */}
+        <SavingsStreak transactions={transactions} />
+      </div>
+
       <div className="charts-wrapper">
         <ExpenseChart transactions={transactions} />
         <MonthlyExpenseChart transactions={transactions} />
