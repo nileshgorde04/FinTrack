@@ -1,8 +1,5 @@
 import React from 'react';
-// NEW: Import our formatter
 import { formatCurrency } from '../utils/currencyFormatter';
-
-// NEW: Accept currency prop
 function GroupSummary({ members, transactions, currency }) {
   
   // 1. Calculate totals (logic is unchanged)
