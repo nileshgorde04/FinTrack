@@ -1,16 +1,73 @@
-# React + Vite
+# FinTrack 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FinTrack is a modern personal finance and group expense visualizer. It helps you track your income, expenses, and savings with interactive dashboards, and now includes a powerful group-splitting feature for managing shared expenses with roommates or friends.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+This project is built with a clean, component-based React structure and includes a wide range of features:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Core Dashboard
+* **Dynamic Summary:** See your total income, total expenses, and current balance calculated in real-time.
+* **Budget Tracking:** A dedicated card shows your spending progress against a set monthly budget, with a visual progress bar.
+* **Gamification:** A "Savings Streak" card 🔥 motivates you by tracking consecutive days of positive or zero net spending.
 
-## Expanding the ESLint configuration
+### 2. Transaction Management
+* **Add Transactions:** Easily add new income or expenses with a description, amount, and date.
+* **Delete Transactions:** Remove any transaction from your list with a single click.
+* **Full History:** The dashboard displays your complete transaction history, which updates instantly.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 3. Data Visualization
+* **Expense Pie Chart:** A pie chart from `Recharts` shows a visual breakdown of your expenses by description.
+* **Monthly Trends Bar Chart:** A bar chart tracks your total spending month-by-month to help you identify trends.
+
+### 4. Group Expense Splitting
+* **Create Groups:** A dedicated "Groups" page lets you create new groups (e.g., "Roommates," "Goa Trip") and add members.
+* **Group-Specific Dashboard:** Each group has its own detail page.
+* **Add Group Expenses:** Log expenses for the group, specifying who paid (e.g., "Pizza, ₹800, paid by Nilesh").
+* **"Who Owes Whom" Summary:** A dynamic summary card calculates each member's balance, showing who is owed money and who needs to pay.
+
+### 5. Customization & UI
+* **Light/Dark Mode:** Toggle between light and dark themes with a click. The entire app (including charts) responds.
+* **Multi-Currency Support:** A "Settings" page allows you to change your display currency (e.g., INR, USD, EUR). All monetary values across the app are instantly converted and displayed.
+
+---
+
+## Tech Stack
+
+* **Framework:** React 19 (using Hooks)
+* **Bundler:** Vite
+* **Routing:** React Router v7
+* **Charts:** Recharts
+* **Styling:** Plain CSS with CSS Variables (for theming)
+
+---
+
+## Getting Started
+
+To run this project locally, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [your-repo-url]
+    cd fintrack
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The app will be available at `http://localhost:5173`.
+
+## Available Scripts
+
+* `npm run dev`: Starts the app in development mode.
+* `npm run build`: Bundles the app for production.
+* `npm run lint`: Lints the project files.
+* `npm run preview`: Serves the production build locally.
