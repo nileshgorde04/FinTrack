@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; // Import useState
 
-// Helper function to get today's date in YYYY-MM-DD format
+
 const getTodayDate = () => {
   const today = new Date();
   return today.toISOString().split('T')[0];
@@ -8,11 +8,11 @@ const getTodayDate = () => {
 
 // Accept the onAddTransaction function as a prop
 function AddTransaction({ onAddTransaction }) {
-  // State for each form input
+  
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [type, setType] = useState('expense'); 
-  // NEW: Add state for date, default to today
+  
   const [date, setDate] = useState(getTodayDate()); 
 
   const handleSubmit = (e) => {
@@ -50,7 +50,7 @@ function AddTransaction({ onAddTransaction }) {
           type="text"
           placeholder="Description"
           value={description} 
-          onChange={(e) => setDescription(e.target.value)} // Update state on change
+          onChange={(e) => setDescription(e.target.value)} 
         />
         <input
           type="number"
