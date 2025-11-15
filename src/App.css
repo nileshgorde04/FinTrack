@@ -146,13 +146,6 @@ body {
   margin-top: 0;
 }
 
-/* Make AddTransaction component full width when on its own page */
-.content-wrapper {
-  /* This class is no longer used in App.jsx, 
-     but we can re-purpose it or remove it. 
-     For now, we'll just style the components directly. */
-}
-
 .add-transaction {
   max-width: 600px;
   margin: 0 auto; /* Center the form on the "Add" page */
@@ -241,6 +234,8 @@ body {
   --header-color: #2c3e50;
   --link-color: #3498db;
   --link-hover-bg: #ecf0f1;
+  --note-bg-color: #ecf0f1;
+  --note-border-color: #3498db;
 }
 
 [data-theme="dark"] {
@@ -252,10 +247,9 @@ body {
   --header-color: #e0e0e0;
   --link-color: #0f4c75;
   --link-hover-bg: #1b263b;
+  --note-bg-color: #1b263b;
+  --note-border-color: #0f4c75;
 }
-
-/* --- End of New Variables --- */
-
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -787,64 +781,84 @@ body {
   font-weight: 600;
 }
 
-/* UPDATED: Styles for Settings Page */
+
 .settings-page {
   max-width: 600px;
-  margin: 20px auto; 
+  margin: 20px auto;
+  /* Add more internal padding for a spacious feel */
+  padding: 20px 30px 30px 30px; 
 }
 
 .settings-page h2 {
   text-align: center;
   margin-top: 0;
-  padding-bottom: 15px;
+  padding-bottom: 20px; /* More spacing */
   border-bottom: 1px solid var(--border-color);
+  color: var(--header-color); /* Ensure it uses theme color */
 }
 
 .setting-item {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 0;
+  flex-direction: column; /* Stack label and select on small screens */
+  align-items: flex-start;
+  gap: 10px; /* Space between label and select */
+  padding: 25px 0; /* More vertical padding */
   border-bottom: 1px solid var(--border-color);
+}
+
+/* On wider screens, place them side-by-side */
+@media (min-width: 500px) {
+  .setting-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .setting-item:last-of-type {
   border-bottom: none;
+  padding-bottom: 10px;
 }
 
 .setting-item label {
-  font-weight: 500;
+  font-weight: 600; /* Bolder */
   font-size: 1.1em;
   color: var(--text-color);
 }
 
 .setting-item select {
-  padding: 10px 15px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  border-radius: 6px;
+  padding: 12px 18px; /* Generous padding */
+  border: 2px solid var(--border-color); /* Clear border */
+  background-color: var(--bg-color); /* Use theme bg */
+  color: var(--text-color); /* Use theme text */
+  border-radius: 8px; /* Softer radius */
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600; /* Bolder text */
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.setting-item select:hover {
-  border-color: var(--link-color);
-}
-
 .setting-item select:focus {
   outline: none;
-  border-color: var(--link-color);
-  box-shadow: 0 0 0 2px var(--link-hover-bg);
+  border-color: var(--link-color); /* Use link color for focus */
+  /* Use a modern focus ring */
+  box-shadow: 0 0 0 3px var(--link-hover-bg); 
 }
 
+.setting-item select:hover {
+   border-color: var(--text-color-light); /* Hover border */
+}
+
+/* NEW, STYLED SETTINGS NOTE */
 .settings-note {
-  font-size: 0.9em;
+  font-size: 0.85em;  /* 1. Made the text size smaller */
+  font-style: italic; /* 2. Changed the text style */
   color: var(--text-color-light);
   text-align: center;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-color);
+  margin-top: 30px;
+  padding: 16px 20px;
+  background-color: var(--note-bg-color); /* Use new soft color */
+  border: 1px solid var(--note-border-color); /* Use new soft border */
+  border-radius: 8px;
+  line-height: 1.5;
 }
