@@ -209,3 +209,24 @@ body {
 .add-transaction input[type="date"] {
   width: calc(100% - 20px); /* Account for padding */
 }
+
+
+/* NEW: Wrapper for charts */
+.charts-wrapper {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to 1 column on mobile */
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* On screens wider than 768px, show 2 columns */
+@media (min-width: 768px) {
+  .charts-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Make chart containers take full height */
+.chart-container {
+  height: 100%; 
+}
