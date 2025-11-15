@@ -1,8 +1,5 @@
 import React from 'react';
-// NEW: Import our formatter
 import { formatCurrency } from '../utils/currencyFormatter';
-
-// NEW: Accept currency prop
 function Dashboard({ transactions, budget, currency }) {
 
   const totalIncome = transactions
