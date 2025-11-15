@@ -14,8 +14,9 @@ function Layout({ theme, toggleTheme }) {
         <nav>
           <Link to="/">Dashboard</Link>
           <Link to="/add">Add Transaction</Link>
-          {/* NEW: Link to the Groups page */}
           <Link to="/groups">Groups</Link>
+          {/* NEW: Link to Settings Page */}
+          <Link to="/settings">Settings</Link>
         </nav>
       </header>
       <main className="app-main">

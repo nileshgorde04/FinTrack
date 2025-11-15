@@ -5,10 +5,18 @@ import './App.css';
 import Layout from './components/Layout';
 import DashboardPage from './pages/DashboardPage';
 import AddTransaction from './components/AddTransaction'; 
-import GroupsPage from './pages/GroupsPage'; // Already imported
+import GroupsPage from './pages/GroupsPage';
+import GroupDetailPage from './pages/GroupDetailPage';
+import SettingsPage from './pages/SettingsPage';
+
+const currencyOptions = [
+  { code: 'INR', symbol: '₹', rate: 1 },
+  { code: 'USD', symbol: '$', rate: 0.012 },
+  { code: 'EUR', symbol: '€', rate: 0.011 },
+];
 
 function App() {
-  // ... (all your existing state: transactions, budget, theme)
+  // ... (all other state: transactions, budget, theme, groups)
   const [transactions, setTransactions] = useState([
     { id: 1, description: 'Salary', amount: 50000, type: 'income', date: '2025-10-01' },
     { id: 2, description: 'Starbucks', amount: 350, type: 'expense', date: '2025-10-02' },
@@ -19,14 +27,16 @@ function App() {
   ]);
   const [budget, setBudget] = useState(10000); 
   const [theme, setTheme] = useState('light');
-  
-  // NEW: State for managing groups
   const [groups, setGroups] = useState([
-    { id: 1, name: 'Roommates', members: ['Nilesh', 'Rohan', 'Anya'] },
-    { id: 2, name: 'Goa Trip', members: ['Anya', 'David', 'Nilesh'] }
+    { id: 1, name: 'Roommates', members: ['Nilesh', 'Rohan', 'Anya'], transactions: [
+      { id: 101, description: 'Pizza', amount: 800, paidBy: 'Nilesh' },
+      { id: 102, description: 'Electricity Bill', amount: 2500, paidBy: 'Anya' },
+    ]},
+    { id: 2, name: 'Goa Trip', members: ['Anya', 'David', 'Nilesh'], transactions: [] }
   ]);
+  const [currency, setCurrency] = useState(currencyOptions[0]);
 
-  // ... (toggleTheme, useEffect, handleAddTransaction, handleDeleteTransaction)
+  // ... (all handler functions: toggleTheme, handleAddTransaction, etc.)
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
@@ -39,8 +49,6 @@ function App() {
   const handleDeleteTransaction = (id) => {
     setTransactions(transactions.filter((tx) => tx.id !== id));
   };
-  
-  // NEW: Function to create a new group
   const handleCreateGroup = (groupName, membersString) => {
     if (!groupName || !membersString) {
       alert('Please fill in both group name and members.');
@@ -51,12 +59,21 @@ function App() {
       id: Date.now(),
       name: groupName,
       members: membersArray,
-      // We'll add transactions to groups later
-      // transactions: [] 
+      transactions: []
     };
     setGroups([...groups, newGroup]);
   };
-
+  const handleAddGroupTransaction = (groupId, newTx) => {
+    setGroups(groups.map(group => {
+      if (group.id === groupId) {
+        return {
+          ...group,
+          transactions: [...group.transactions, newTx]
+        };
+      }
+      return group;
+    }));
+  };
 
   return (
     <BrowserRouter>
@@ -65,28 +82,37 @@ function App() {
           
           <Route 
             index 
-            element={
+            element={ 
               <DashboardPage 
                 transactions={transactions} 
-                budget={budget}
-                onDeleteTransaction={handleDeleteTransaction} 
-              />
+                budget={budget} 
+                onDeleteTransaction={handleDeleteTransaction}
+                currency={currency} /* NEW: Pass currency */
+              /> 
             } 
           />
           <Route 
             path="add" 
-            element={<AddTransaction onAddTransaction={handleAddTransaction} />} 
+            element={ <AddTransaction onAddTransaction={handleAddTransaction} /> } 
+            /* Note: We assume "Add" is always in the base currency (INR) */
           />
-          
-          {/* NEW: Pass groups state and create function to GroupsPage */}
           <Route 
             path="groups" 
-            element={
-              <GroupsPage 
+            element={ <GroupsPage groups={groups} onCreateGroup={handleCreateGroup} /> } 
+          />
+          <Route 
+            path="groups/:groupId" 
+            element={ 
+              <GroupDetailPage 
                 groups={groups} 
-                onCreateGroup={handleCreateGroup} 
-              />
-            } 
+                onAddGroupTransaction={handleAddGroupTransaction} 
+                currency={currency} /* NEW: Pass currency */
+              /> 
+            }
+          />
+          <Route
+            path="settings"
+            element={ <SettingsPage currentCurrency={currency} setCurrency={setCurrency} options={currencyOptions} /> }
           />
           
         </Route>

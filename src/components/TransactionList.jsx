@@ -1,8 +1,10 @@
 import React from 'react';
+// NEW: Import our formatter
+import { formatCurrency } from '../utils/currencyFormatter';
 
-function TransactionList({ transactions, onDeleteTransaction }) {
+// NEW: Accept currency prop
+function TransactionList({ transactions, onDeleteTransaction, currency }) {
   
-  // Helper to format the date
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
@@ -14,16 +16,16 @@ function TransactionList({ transactions, onDeleteTransaction }) {
       <ul>
         {transactions.map((transaction) => (
           <li key={transaction.id}>
-            {/* NEW: Wrapper for description and date */}
             <div className="transaction-info">
               <span>{transaction.description}</span>
-              {/* NEW: Display the formatted date */}
               <span className="transaction-date">{formatDate(transaction.date)}</span>
             </div>
             
             <div className="transaction-details">
               <span className={transaction.type === 'income' ? 'income' : 'expense'}>
-                {transaction.type === 'income' ? '+' : '-'}₹{transaction.amount}
+                {transaction.type === 'income' ? '+' : '-'}
+                {/* NEW: Use formatter */}
+                {formatCurrency(transaction.amount, currency)}
               </span>
               <button 
                 className="delete-btn" 

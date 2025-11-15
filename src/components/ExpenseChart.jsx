@@ -1,16 +1,16 @@
 import React from 'react';
-// Import PieChart components from recharts
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+// NEW: Import our formatter
+import { formatCurrency } from '../utils/currencyFormatter';
 
-// Define some colors for the chart segments
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1919'];
 
-function ExpenseChart({ transactions }) {
-  // 1. Process the data
+// NEW: Accept currency prop
+function ExpenseChart({ transactions, currency }) {
+  // ... (data processing logic is unchanged)
   const expenseData = transactions
     .filter(tx => tx.type === 'expense')
     .reduce((acc, tx) => {
-      // Group by description (or category, later)
       const key = tx.description; 
       if (!acc[key]) {
         acc[key] = 0;
@@ -18,8 +18,6 @@ function ExpenseChart({ transactions }) {
       acc[key] += tx.amount;
       return acc;
     }, {});
-
-  // 2. Format it for the pie chart
   const pieChartData = Object.keys(expenseData).map((key) => ({
     name: key,
     value: expenseData[key],
@@ -45,7 +43,8 @@ function ExpenseChart({ transactions }) {
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip />
+            {/* NEW: Add formatter to the tooltip */}
+            <Tooltip formatter={(value) => formatCurrency(value, currency)} />
             <Legend />
           </PieChart>
         </ResponsiveContainer>
@@ -55,4 +54,5 @@ function ExpenseChart({ transactions }) {
     </div>
   );
 }
+
 export default ExpenseChart;

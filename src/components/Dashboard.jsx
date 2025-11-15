@@ -1,7 +1,9 @@
 import React from 'react';
+// NEW: Import our formatter
+import { formatCurrency } from '../utils/currencyFormatter';
 
-// This component now *only* renders the cards
-function Dashboard({ transactions, budget }) {
+// NEW: Accept currency prop
+function Dashboard({ transactions, budget, currency }) {
 
   const totalIncome = transactions
     .filter(tx => tx.type === 'income')
@@ -17,26 +19,29 @@ function Dashboard({ transactions, budget }) {
   const progress = Math.min((totalExpenses / budget) * 100, 100);
 
   return (
-    // Use React.Fragment to return multiple elements
     <>
       <div className="card">
         <h3>Total Income</h3>
-        <p>₹{totalIncome}</p>
+        {/* NEW: Use formatter */}
+        <p>{formatCurrency(totalIncome, currency)}</p>
       </div>
       <div className="card">
         <h3>Total Expenses</h3>
-        <p>₹{totalExpenses}</p>
+        {/* NEW: Use formatter */}
+        <p>{formatCurrency(totalExpenses, currency)}</p>
       </div>
       <div className="card">
         <h3>Balance</h3>
         <p style={{ color: balance >= 0 ? '#2ecc71' : '#e74c3c' }}>
-          ₹{balance}
+          {/* NEW: Use formatter */}
+          {formatCurrency(balance, currency)}
         </p>
       </div>
       
       <div className="card budget-card">
         <h3>Monthly Budget</h3>
-        <p>₹{budget}</p>
+        {/* NEW: Use formatter */}
+        <p>{formatCurrency(budget, currency)}</p>
         <div className="budget-info">
           <span style={{ color: isOverBudget ? 'red' : 'green', fontSize: '0.8em' }}>
             {isOverBudget ? 'Over Budget!' : 'Within Budget'}

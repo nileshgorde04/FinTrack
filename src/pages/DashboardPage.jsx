@@ -5,33 +5,28 @@ import MonthlyExpenseChart from '../components/MonthlyExpenseChart';
 import TransactionList from '../components/TransactionList';
 import SavingsStreak from '../components/SavingsStreak';
 
-function DashboardPage({ transactions, budget, onDeleteTransaction }) {
+// NEW: Accept currency prop
+function DashboardPage({ transactions, budget, onDeleteTransaction, currency }) {
   return (
     <div className="dashboard-page">
-      
-      {/* NOTE: I am modifying the Dashboard component to *not* render the
-        summary-cards wrapper, and instead render it here.
-        This allows us to add the SavingsStreak card easily.
-      */}
-      
       <h2>My Dashboard</h2>
       <div className="summary-cards">
-        {/* Pass props to Dashboard */}
-        <Dashboard transactions={transactions} budget={budget} />
-        
-        {/* NEW: Add the SavingsStreak card */}
+        {/* NEW: Pass currency down */}
+        <Dashboard transactions={transactions} budget={budget} currency={currency} />
         <SavingsStreak transactions={transactions} />
       </div>
 
       <div className="charts-wrapper">
-        <ExpenseChart transactions={transactions} />
-        <MonthlyExpenseChart transactions={transactions} />
+        {/* NEW: Pass currency down */}
+        <ExpenseChart transactions={transactions} currency={currency} />
+        <MonthlyExpenseChart transactions={transactions} currency={currency} />
       </div>
       
       <div style={{ marginTop: '30px' }}>
         <TransactionList 
           transactions={transactions}
           onDeleteTransaction={onDeleteTransaction} 
+          currency={currency} /* NEW: Pass currency down */
         /> 
       </div>
     </div>

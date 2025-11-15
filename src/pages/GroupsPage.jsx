@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-// NEW: Accept props from App.jsx
 function GroupsPage({ groups, onCreateGroup }) {
   const [groupName, setGroupName] = useState('');
   const [members, setMembers] = useState('');
@@ -23,13 +23,15 @@ function GroupsPage({ groups, onCreateGroup }) {
             type="text"
             placeholder="Group Name (e.g., 'Roommates')"
             value={groupName}
-            onChange={(e) => setGroupName(e.g.target.value)}
+            // FIXED: Removed the 'e.g.' typo
+            onChange={(e) => setGroupName(e.target.value)}
           />
           <input
             type="text"
             placeholder="Members (comma-separated, e.g., 'Me, Rohan, Anya')"
             value={members}
-            onChange={(e) => setMembers(e.g.target.value)}
+            // FIXED: Removed the 'e.g.' typo
+            onChange={(e) => setMembers(e.target.value)}
           />
           <button type="submit">Create Group</button>
         </form>
@@ -44,10 +46,13 @@ function GroupsPage({ groups, onCreateGroup }) {
           <ul>
             {groups.map(group => (
               <li key={group.id} className="group-item">
-                <h3>{group.name}</h3>
-                <p>Members: {group.members.join(', ')}</p>
-                {/* We will make this button functional later */}
-                <button className="view-group-btn">View Details</button>
+                <div> {/* Wrapper for text */}
+                  <h3>{group.name}</h3>
+                  <p>Members: {group.members.join(', ')}</p>
+                </div>
+                <Link to={`/groups/${group.id}`} className="view-group-btn">
+                  View Details
+                </Link>
               </li>
             ))}
           </ul>
