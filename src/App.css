@@ -230,3 +230,274 @@ body {
 .chart-container {
   height: 100%; 
 }
+
+/* NEW: CSS Variables for theming */
+:root {
+  --bg-color: #f4f7fa;
+  --card-bg-color: #ffffff;
+  --text-color: #333;
+  --text-color-light: #555;
+  --border-color: #eee;
+  --header-color: #2c3e50;
+  --link-color: #3498db;
+  --link-hover-bg: #ecf0f1;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a1a2e;
+  --card-bg-color: #16213e;
+  --text-color: #e0e0e0;
+  --text-color-light: #b0b0b0;
+  --border-color: #2a3b5f;
+  --header-color: #e0e0e0;
+  --link-color: #0f4c75;
+  --link-hover-bg: #1b263b;
+}
+
+/* --- End of New Variables --- */
+
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* UPDATED: Use variables */
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  transition: background-color 0.2s, color 0.2s; /* Smooth transition */
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-header {
+  text-align: center;
+  /* UPDATED: Use variable */
+  color: var(--header-color);
+  margin-bottom: 20px;
+  position: relative; /* For positioning the toggle */
+}
+
+/* NEW: Theme Toggle Button Style */
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+/* --- End of New Button Style --- */
+
+
+.summary-cards {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  /* UPDATED: Use variables */
+  background-color: var(--card-bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  flex-basis: 30%;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.card h3 {
+  margin-top: 0;
+  /* UPDATED: Use variable */
+  color: var(--text-color-light);
+}
+
+.card p {
+  font-size: 2em;
+  font-weight: 600;
+  /* UPDATED: Use variable */
+  color: var(--header-color);
+}
+
+/* ... (after the .card p rule) ... */
+
+/*content*/
+.content-wrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.add-transaction, .transaction-list, .chart-container {
+  /* UPDATED: Use variables */
+  background-color: var(--card-bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  transition: background-color 0.2s;
+}
+
+.add-transaction form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-transaction input[type="text"],
+.add-transaction input[type="number"],
+.add-transaction input[type="date"] {
+  padding: 10px;
+  /* UPDATED: Use variables */
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  width: calc(100% - 20px); /* Account for padding */
+}
+
+.add-transaction button {
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.add-transaction button:hover {
+  background-color: #2980b9;
+}
+
+
+.transaction-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transaction-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  /* UPDATED: Use variable */
+  border-bottom: 1px solid var(--border-color);
+  align-items: center; /* Vertically center items */
+}
+
+.transaction-list li span:last-child {
+  font-weight: 600;
+  color: #e74c3c; 
+}
+
+.transaction-list li span.income {
+  color: #2ecc71; 
+}
+
+.app-header nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px; /* Added some space */
+  margin-bottom: 30px;
+}
+
+.app-header nav a {
+  text-decoration: none;
+  /* UPDATED: Use variable */
+  color: var(--link-color);
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+
+.app-header nav a:hover {
+  /* UPDATED: Use variable */
+  background-color: var(--link-hover-bg);
+}
+
+.chart-container {
+  margin-top: 0; /* Removed margin-top, as wrapper handles it */
+  height: 100%;
+}
+
+.chart-container h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+/* Make AddTransaction component full width when on its own page */
+.add-transaction {
+  max-width: 600px;
+  margin: 0 auto; 
+}
+
+/* Style for the transaction info (description + date) */
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-date {
+  font-size: 0.8em;
+  /* UPDATED: Use variable */
+  color: var(--text-color-light);
+}
+
+/* Make the radio buttons line up better */
+.radio-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Transaction details wrapper */
+.transaction-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Wrapper for charts */
+.charts-wrapper {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to 1 column on mobile */
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* On screens wider than 768px, show 2 columns */
+@media (min-width: 768px) {
+  .charts-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Fix for Recharts text color in dark mode */
+.recharts-text {
+  fill: var(--text-color-light);
+}

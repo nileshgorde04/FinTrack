@@ -1,9 +1,8 @@
 import React from 'react';
 
-// Accept the transactions list as a prop
-function Dashboard({ transactions }) {
+// NEW: Accept 'budget' prop
+function Dashboard({ transactions, budget }) {
 
-  // Calculate totals
   const totalIncome = transactions
     .filter(tx => tx.type === 'income')
     .reduce((acc, tx) => acc + tx.amount, 0);
@@ -13,6 +12,10 @@ function Dashboard({ transactions }) {
     .reduce((acc, tx) => acc + tx.amount, 0);
 
   const balance = totalIncome - totalExpenses;
+
+  // NEW: Calculate budget status
+  const isOverBudget = totalExpenses > budget;
+  const progress = Math.min((totalExpenses / budget) * 100, 100); // Cap at 100% for the bar
 
   return (
     <div className="dashboard">
@@ -28,11 +31,25 @@ function Dashboard({ transactions }) {
         </div>
         <div className="card">
           <h3>Balance</h3>
-          {/* Change text color based on balance */}
           <p style={{ color: balance >= 0 ? '#2ecc71' : '#e74c3c' }}>
             ₹{balance}
           </p>
         </div>
+        
+        {/* NEW: Budget Goal Card */}
+        <div className="card budget-card">
+          <h3>Monthly Budget</h3>
+          <p>₹{budget}</p>
+          <div className="budget-info">
+            <span style={{ color: isOverBudget ? 'red' : 'green', fontSize: '0.8em' }}>
+              {isOverBudget ? 'Over Budget!' : 'Within Budget'}
+            </span>
+            {/* Simple HTML5 Progress Bar */}
+            <progress value={progress} max="100" style={{ width: '100%' }}></progress>
+            <small>{Math.round(progress)}% Used</small>
+          </div>
+        </div>
+
       </div>
     </div>
   );
